@@ -1,0 +1,12 @@
+#view3 {
+    height: 400px;
+    /* background-color: yellow; */
+}
+
+#view3 > h3 {
+    margin-left: 5px;
+}
+
+.bar {
+    fill: steelblue;
+}

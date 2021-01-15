@@ -1,89 +1,78 @@
-import React, { Component } from 'react';
-import data from './data';
-import { Layout } from 'antd';
-import View1 from './views/View1';
-import View2 from './views/View2';
-import View3 from './views/View3';
-import View4 from './views/View4';
-import View5 from './views/View5';
-import View6 from './views/View6';
+import React, {useEffect, useState} from 'react';
 import './dashboard.css';
 
-const { Sider, Content, Footer } = Layout;
+import * as d3 from 'd3';
+import adult from './data/adult.csv';
+import PieChartGender from './charts/PieChartGender';
+import PieChartRace from './charts/PieChartRace';
+import BarChartEdu from './charts/BarChartEdu';
+import BarChartWork from './charts/BarChartWork';
 
-export default class Dashboard extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedUser: data[0],
-            greaterThenAge: 0,
-            includedGender: ['Male', 'Female','Unknown'],
-        }
-    }
+const Dashboard = () => {
 
-    changeSelectUser = value => {
-        this.setState({
-            selectedUser: value
-        })
-    }
+    const [data, setData] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
 
-    changeGreaterThenAge = value => {
-        this.setState({
-            greaterThenAge: value
-        })
-    }
+    const initialFilters = {
+        gender: null,
+        race: null,
+    };
+    const [filters, setFilters] = useState(initialFilters);
 
-    changeIncludedGender = value => {
-        this.setState({
-            includedGender: value
-        })
-    }
+    useEffect(() => {
+        d3.csv(adult, (data) => {
+            setData(data);
+            setFilteredData(data);
+        });
+    }, []);
 
-    render() {
-        const {selectedUser, greaterThenAge, includedGender} = this.state;
-        const filteredData = data.filter(user=>includedGender.indexOf(user.gender)!==-1)
-                                 .filter(user=>user.age>greaterThenAge);
-        return (
-            <div>
-                <Layout style={{ height: 920 }}>
-                    <Sider width={300} style={{backgroundColor:'#eee'}}>
-                        <Content style={{ height: 200 }}>
-                            <View1 user={selectedUser}/>
-                        </Content>
-                        <Content style={{ height: 300 }}>
-                            <View2 data={filteredData}/>
-                        </Content>
-                        <Content style={{ height: 400 }}>
-                            <View3 
-                                changeGreaterThenAge={this.changeGreaterThenAge}
-                                changeIncludedGender={this.changeIncludedGender}
-                            />
-                        </Content>
-                    </Sider>
-                    <Layout>
-                        <Content style={{ height: 300 }}>
-                            <View4 user={selectedUser}/>
-                        </Content>
-                        <Layout style={{ height: 600 }}>
-                            <Content>
-                                <View5 data={filteredData}/>
-                            </Content>
-                            <Sider width={300} style={{backgroundColor:'#eee'}}>
-                                <View6 data={filteredData} changeSelectUser={this.changeSelectUser}/>
-                            </Sider>
-                        </Layout>
-                    </Layout>
-                </Layout>
-                <Layout>
-                    <Footer style={{ height: 20 }}>
-                        <div style={{marginTop: -10}}>
-                            Source Code <a href='https://github.com/sdq/react-d3-dashboard'>https://github.com/sdq/react-d3-dashboard</a>;
-                            Author <a href='https://sdq.ai'>sdq</a>;
-                        </div>
-                    </Footer>
-                </Layout>
-            </div>
-        )
-    }
-}
+    useEffect(() => {
+        setFilteredData(data
+            .filter(d => filters.gender ? d.gender === filters.gender : true)
+            .filter(d => filters.race ? d.race === filters.race : true),
+        );
+    }, [data, filters]);
+
+
+    const filterGender = (gender) => {
+        setFilters({
+            ...filters,
+            gender: filters.gender === gender ? null : gender,
+        });
+    };
+
+    const filterRace = (race) => {
+        setFilters({
+            ...filters,
+            race: filters.race === race ? null : race,
+        });
+    };
+
+    const filterEducation = (education) => {
+        console.log('filter: ', education);
+    };
+
+
+    const filterWorkclass = (workclass) => {
+        console.log('filter: ', workclass);
+    };
+
+    return (
+        <div className="grid">
+            <PieChartGender data={filteredData} filter={filterGender}/>
+            <PieChartRace data={filteredData} filter={filterRace}/>
+            <BarChartEdu data={filteredData} filter={filterEducation}/>
+
+            <BarChartWork data={filteredData} filter={filterWorkclass}/>
+            {/*<View1 data={data}/>*/}
+            {/*<View1 data={data}/>*/}
+
+            {/*<View1 data={data}/>*/}
+            {/*<View1 data={data}/>*/}
+            {/*<View1 data={data}/>*/}
+        </div>
+    );
+};
+
+export default Dashboard;
