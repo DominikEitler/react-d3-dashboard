@@ -1,5 +1,6 @@
-#vis-barchart-income {
+#dist-chart-age {
     height: 300px;
     /* background-color: green; */
-    grid-area: income;
+    grid-area: age;
 }
+

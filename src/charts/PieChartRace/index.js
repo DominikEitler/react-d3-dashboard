@@ -1,20 +1,23 @@
 import React, {useEffect} from 'react';
-import draw from './vis';
 import './styles.css';
+import drawPieChart from '../pieChart';
 
 
-const PieChartRace = ({data, filter}) => {
-    const outerWidth = 260;
+const PieChartRace = ({data, values, filter}) => {
+    const outerWidth = 1000 / 8 * 2;
     const outerHeight = 260;
+    const selector = 'vis-piechart-race';
 
     useEffect(() => {
-        draw(data, filter, outerWidth, outerHeight);
+        if (values) {
+            drawPieChart(selector, data, 'race', values, filter, outerWidth, outerHeight);
+        }
     });
 
     return (
-        <div id='view2' className='pane'>
+        <div id={selector} className='pane'>
             <div className='header'>Ethnicity</div>
-            <div className='vis-piechart-race'/>
+            <div className={selector}/>
         </div>
     );
 };

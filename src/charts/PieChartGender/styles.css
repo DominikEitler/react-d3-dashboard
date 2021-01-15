@@ -1,16 +1,6 @@
-#view1 {
+#vis-piechart-gender {
     height: 200px;
     /* background-color: blue; */
+    grid-area: gender
 }
 
-.avatar-view {
-    float: left;
-    margin-left: 10px;
-    margin-top: 16px;
-}
-
-.info-view {
-    float: left;
-    margin-left: 30px;
-    margin-top: 16px;
-}

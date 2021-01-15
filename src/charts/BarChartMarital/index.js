@@ -3,23 +3,23 @@ import './styles.css';
 import drawBarChart from '../barChart';
 
 
-const BarChartWork = ({data, values, filter}) => {
+const BarChartMarital = ({data, values, filter}) => {
     const outerWidth = 1000 / 8 * 3;
     const outerHeight = 250;
-    const selector = 'vis-barchart-work';
+    const selector = 'vis-barchart-marital';
 
     useEffect(() => {
         if (values) {
-            drawBarChart(selector, data, 'workclass', values, filter, outerWidth, outerHeight, 75);
+            drawBarChart(selector, data, 'marital-status', values, filter, outerWidth, outerHeight, 100);
         }
     });
 
     return (
         <div id={selector} className='pane'>
-            <div className='header'>Work Class</div>
+            <div className='header'>Marital Status</div>
             <div className={selector}/>
         </div>
     );
 };
 
-export default BarChartWork;
+export default BarChartMarital;

@@ -1,22 +1,20 @@
 import * as d3 from 'd3';
 
 
-const draw = (data, filter, outerWidth, outerHeight) => {
+const drawPieChart = (selector, data, target, values, filter, outerWidth, outerHeight) => {
 
-    const race = [...new Set(data.map(d => d.race))];
-    const counts = race.map(g => data.filter(d => d.race === g).length);
-
-    const dataset = race.map((_, i) => ({
-        label: race[i],
+    const counts = values.map(g => data.filter(d => d[target] === g).length);
+    const dataset = values.map((_, i) => ({
+        label: values[i],
         count: counts[i],
     }));
 
-    d3.select('.vis-piechart-race > *').remove();
+    d3.select(`.${selector} > *`).remove();
     const margin = {top: 10, right: 20, bottom: 30, left: 40};
     const width = outerWidth - margin.left - margin.right;
     const height = outerHeight - margin.top - margin.bottom;
 
-    let svg = d3.select('.vis-piechart-race')
+    let svg = d3.select(`.${selector}`)
         .append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
@@ -25,17 +23,14 @@ const draw = (data, filter, outerWidth, outerHeight) => {
 
     let radius = Math.min(width, height) / 2;
 
-    let color = d3.scaleOrdinal()
-        .range(['steelblue', 'LightBlue', 'red', 'black', 'brown']);
+    let color = d3.scaleOrdinal(d3.schemeCategory10);
 
     let arc = d3.arc()
         .innerRadius(0)
         .outerRadius(radius);
 
     let pie = d3.pie()
-        .value(function (d) {
-            return d.count;
-        })
+        .value(d => d.count)
         .sort(null);
 
     svg.selectAll('path')
@@ -43,10 +38,8 @@ const draw = (data, filter, outerWidth, outerHeight) => {
         .enter()
         .append('path')
         .attr('d', arc)
-        .attr('fill', function (d, i) {
-            return color(d.data.label);
-        })
-        .on('click', (d, i) => filter(d.data.label))
+        .attr('fill', (_, i) => color(i))
+        .on('click', d => filter(d.data.label))
         .on('mouseover', function (d, i) {
             d3.select(this).style('cursor', 'pointer');
         })
@@ -57,25 +50,19 @@ const draw = (data, filter, outerWidth, outerHeight) => {
     let legendG = svg.selectAll('.legend')
         .data(pie(dataset))
         .enter().append('g')
-        .attr('transform', function (d, i) {
-            return 'translate(' + (i * 70 - 100) + ',' + 110 + ')';
-        })
+        .attr('transform', (_, i) => 'translate(' + (i * 70 - 100) + ',' + 110 + ')')
         .attr('class', 'legend');
 
     legendG.append('rect')
         .attr('width', 10)
         .attr('height', 10)
-        .attr('fill', function (d, i) {
-            return color(i);
-        });
+        .attr('fill', (_, i) => color(i));
 
     legendG.append('text')
-        .text(function (d) {
-            return d.data.label;
-        })
+        .text(d => d.data.label)
         .style('font-size', 12)
         .attr('y', 10)
         .attr('x', 11);
 };
 
-export default draw;
+export default drawPieChart;

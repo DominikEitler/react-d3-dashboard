@@ -1,20 +1,23 @@
 import React, {useEffect} from 'react';
-import draw from './vis';
 import './styles.css';
+import drawBarChart from '../barChart';
 
 
-const BarChartIncome = ({data, filter}) => {
-    const outerWidth = 250;
+const BarChartIncome = ({data, values, filter}) => {
+    const outerWidth = 1000 / 8 * 2;
     const outerHeight = 250;
+    const selector = 'vis-barchart-income';
 
     useEffect(() => {
-        draw(data, filter, outerWidth, outerHeight);
+        if (values) {
+            drawBarChart(selector, data, 'income', values, filter, outerWidth, outerHeight);
+        }
     });
 
     return (
-        <div id='view5' className='pane'>
+        <div id={selector} className='pane'>
             <div className='header'>Income</div>
-            <div className='vis-barchart-income'/>
+            <div className={selector}/>
         </div>
     );
 };

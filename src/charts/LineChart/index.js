@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import draw from './vis';
+
 
 export default class LineChart extends Component {
 
@@ -14,6 +15,6 @@ export default class LineChart extends Component {
     render() {
         return (
             <div className='vis-linechart'/>
-        )
+        );
     }
 }

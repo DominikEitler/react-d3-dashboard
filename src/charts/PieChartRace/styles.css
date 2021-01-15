@@ -1,4 +1,5 @@
-#view2 {
+#vis-piechart-race {
     height: 300px;
     /* background-color: yellowgreen; */
+    grid-area: race;
 }
