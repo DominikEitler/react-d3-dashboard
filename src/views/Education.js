@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
-import './styles.css';
-import drawBarChart from '../barChart';
+import drawBarChart from '../charts/barChart';
 
 
 const BarChartEdu = ({data, values, filter}) => {

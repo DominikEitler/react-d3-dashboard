@@ -1,16 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import './dashboard.css';
-
 import * as d3 from 'd3';
+import './styles.css';
+
+import PieChartGender from './views/Gender';
+import PieChartRace from './views/Race';
+import BarChartEdu from './views/Education';
+import BarChartWork from './views/Work';
+import BarChartIncome from './views/Income';
+import DistChartAge from './views/Age';
+import BarChartMarital from './views/Marital';
+import BarChartOccupation from './views/Occupation';
+
 import adult from './data/adult.csv';
-import PieChartGender from './charts/PieChartGender';
-import PieChartRace from './charts/PieChartRace';
-import BarChartEdu from './charts/BarChartEdu';
-import BarChartWork from './charts/BarChartWork';
-import BarChartIncome from './charts/BarChartIncome';
-import DistChartAge from './charts/DistChartAge';
-import BarChartMarital from './charts/BarChartMarital';
-import BarChartOccupation from './charts/BarChartOccupation';
 
 
 const Dashboard = () => {
@@ -32,7 +33,25 @@ const Dashboard = () => {
     };
     const [filters, setFilters] = useState(initialFilters);
 
+    const createTooltip = () => {
+        d3.select('body')
+            .append('div')
+            .attr('id', 'mytooltip')
+            .style('position', 'absolute')
+            .style('z-index', '10')
+            .style('visibility', 'hidden')
+            .style('background-color', 'whitesmoke')
+            .style('color', 'black')
+            .style('padding', '2px 5px')
+            .style('border-radius', '5px')
+            .style('border', '1px solid lightgray')
+            .style('opacity', '80%');
+    };
+
     useEffect(() => {
+
+        createTooltip();
+
         d3.csv(adult, (data) => {
             setData(data);
             setFilteredData(data);
@@ -47,7 +66,6 @@ const Dashboard = () => {
     }, []);
 
     useEffect(() => {
-        console.log(JSON.stringify(filters));
         setFilteredData(data.filter(d => {
                 return (filters.gender ? d.gender === filters.gender : true) &&
                     (filters.gender ? d.gender === filters.gender : true) &&
@@ -121,22 +139,25 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="grid">
-            <PieChartGender data={filteredData} values={values['gender']} filter={filterGender}/>
+        <div className='content'>
 
-            <PieChartRace data={filteredData} values={values['race']} filter={filterRace}/>
+            <div className="grid">
+                <PieChartGender data={filteredData} values={values['gender']} filter={filterGender}/>
 
-            <BarChartEdu data={filteredData} values={values['education']} filter={filterEducation}/>
+                <PieChartRace data={filteredData} values={values['race']} filter={filterRace}/>
 
-            <BarChartWork data={filteredData} values={values['workclass']} filter={filterWorkclass}/>
+                <BarChartEdu data={filteredData} values={values['education']} filter={filterEducation}/>
 
-            <BarChartIncome data={filteredData} values={values['income']} filter={filterIncome}/>
+                <BarChartWork data={filteredData} values={values['workclass']} filter={filterWorkclass}/>
 
-            <DistChartAge data={filteredData} range={ageRange} filter={filterAge}/>
+                <BarChartIncome data={filteredData} values={values['income']} filter={filterIncome}/>
 
-            <BarChartMarital data={filteredData} values={values['marital-status']} filter={filterMarital}/>
+                <DistChartAge data={filteredData} range={ageRange} filter={filterAge}/>
 
-            <BarChartOccupation data={filteredData} values={values['occupation']} filter={filterOccupation}/>
+                <BarChartMarital data={filteredData} values={values['marital-status']} filter={filterMarital}/>
+
+                <BarChartOccupation data={filteredData} values={values['occupation']} filter={filterOccupation}/>
+            </div>
         </div>
     );
 };

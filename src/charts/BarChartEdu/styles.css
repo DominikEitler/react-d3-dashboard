@@ -1,9 +1,0 @@
-#vis-barchart-edu {
-    height: 400px;
-    /* background-color: yellow; */
-    grid-area: edu;
-}
-
-#vis-barchart-edu > h3 {
-    margin-left: 5px;
-}

@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
-import './styles.css';
-import drawPieChart from '../pieChart';
+import drawPieChart from '../charts/pieChart';
 
 
 const PieChartGender = ({data, values, filter}) => {

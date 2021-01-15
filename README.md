@@ -1,3 +1,5 @@
-## React-D3-Dashboard
+# Dashboard
 
-This is a template project to build a dashboard with React + D3.
+This is a dashboard for a university project.
+
+The base code originates from https://github.com/sdq/react-d3-dashboard.

@@ -10,9 +10,9 @@ const kernelEpanechnikov = (k) => {
     return (v) => Math.abs(v /= k) <= 1 ? 0.75 * (1 - v * v) / k : 0;
 };
 
-const drawDistChart = (selector, data, target, range, filter, outerWidth, outerHeight) => {
+const drawDistChart = (selector, data, target, range, filter, outerWidth, outerHeight, mBottom) => {
     d3.select(`.${selector} > *`).remove();
-    const margin = {top: 20, right: 20, bottom: 30, left: 40};
+    const margin = {top: 20, right: 20, bottom: mBottom, left: 40};
     const width = outerWidth - margin.left - margin.right;
     const height = outerHeight - margin.top - margin.bottom;
     let svg = d3.select(`.${selector}`).append('svg')
@@ -25,9 +25,6 @@ const drawDistChart = (selector, data, target, range, filter, outerWidth, outerH
     let x = d3.scaleLinear()
         .domain([range[0] - 10, range[1] + 10])
         .range([0, width]);
-    svg.append('g')
-        .attr('transform', 'translate(0,' + height + ')')
-        .call(d3.axisBottom(x));
 
     // Compute kernel density estimation
     const kde = kernelDensityEstimator(kernelEpanechnikov(7), x.ticks(40));
@@ -40,9 +37,6 @@ const drawDistChart = (selector, data, target, range, filter, outerWidth, outerH
     let yAx = d3.scaleLinear()
         .domain([0, d3.max(data, d => d[target])])
         .range([height, 0]);
-
-    svg.append('g')
-        .call(d3.axisLeft(yAx));
 
 
     // Plot the area
@@ -59,6 +53,29 @@ const drawDistChart = (selector, data, target, range, filter, outerWidth, outerH
             .x(d => x(d[0]))
             .y(d => y(d[1])),
         );
+
+    svg.append('g')
+        .attr('transform', 'translate(0,' + height + ')')
+        .call(d3.axisBottom(x));
+
+    svg.append('text')
+        .attr('transform', `translate(${width / 2}, ${height + margin.top + 10})`)
+        .attr('font-size', '10px')
+        .style('text-anchor', 'middle')
+        .text('age');
+
+    svg.append('g')
+        .call(d3.axisLeft(yAx));
+
+    svg.append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('y', 0 - margin.left)
+        .attr('x', 0 - (height / 2))
+        .attr('dy', '1em')
+        .attr('font-size', '10px')
+        .style('text-anchor', 'middle')
+        .text('count');
+
 
 };
 

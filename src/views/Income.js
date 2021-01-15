@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
-import './styles.css';
-import drawBarChart from '../barChart';
+import drawBarChart from '../charts/barChart';
 
 
 const BarChartIncome = ({data, values, filter}) => {
@@ -10,7 +9,7 @@ const BarChartIncome = ({data, values, filter}) => {
 
     useEffect(() => {
         if (values) {
-            drawBarChart(selector, data, 'income', values, filter, outerWidth, outerHeight);
+            drawBarChart(selector, data, 'income', values, filter, outerWidth, outerHeight, 50, false);
         }
     });
 
