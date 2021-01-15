@@ -7,6 +7,7 @@ import PieChartGender from './charts/PieChartGender';
 import PieChartRace from './charts/PieChartRace';
 import BarChartEdu from './charts/BarChartEdu';
 import BarChartWork from './charts/BarChartWork';
+import BarChartIncome from './charts/BarChartIncome';
 
 
 const Dashboard = () => {
@@ -65,6 +66,7 @@ const Dashboard = () => {
             <BarChartEdu data={filteredData} filter={filterEducation}/>
 
             <BarChartWork data={filteredData} filter={filterWorkclass}/>
+            <BarChartIncome data={filteredData} filter={filterWorkclass}/>
             {/*<View1 data={data}/>*/}
             {/*<View1 data={data}/>*/}
 
