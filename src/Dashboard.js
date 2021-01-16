@@ -56,7 +56,6 @@ const Dashboard = () => {
             setData(data);
             setFilteredData(data);
             let vals = {};
-            // eslint-disable-next-line
             Object.keys(data[0]).map((k, i) => {
                 vals[k] = [...new Set(data.map(d => d[k]).filter(d => d !== '?'))];
             });
