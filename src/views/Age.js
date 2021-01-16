@@ -37,6 +37,7 @@ const DistChartAge = ({data, range, filter}) => {
                     onChangeCommitted={(_, newValue) => filter(newValue)}
                     valueLabelDisplay="auto"
                     aria-labelledby="range-slider"
+                    // eslint-disable-next-line
                     // marks={marks} TODO
                 />
             </div>
