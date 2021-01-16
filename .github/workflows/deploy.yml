@@ -1,0 +1,24 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: install yarn
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+          
+      - name: build and deploy
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: deploy
