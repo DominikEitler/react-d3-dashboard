@@ -9,7 +9,6 @@ const DistChartAge = ({data, range, filter}) => {
     const selector = 'dist-chart-age';
 
     const [sliderValue, setSliderValue] = useState(range);
-    const [marks, setMarks] = useState([]);
 
     useEffect(() => {
         drawDistChart(selector, data, 'age', range, filter, outerWidth, outerHeight, 35);
@@ -17,12 +16,7 @@ const DistChartAge = ({data, range, filter}) => {
 
     useEffect(() => {
         setSliderValue(range);
-        setMarks([0,100].map(x => ({label: x, value: x})));
     }, [range]);
-
-    const handleChange = (event, newValue) => {
-        setSliderValue(newValue);
-    };
 
     return (
         <div id={selector} className='pane'>
@@ -33,7 +27,7 @@ const DistChartAge = ({data, range, filter}) => {
                     min={range[0]}
                     max={range[1]}
                     value={sliderValue}
-                    onChange={handleChange}
+                    onChange={(_, newValue) => setSliderValue(newValue)}
                     onChangeCommitted={(_, newValue) => filter(newValue)}
                     valueLabelDisplay="auto"
                     aria-labelledby="range-slider"

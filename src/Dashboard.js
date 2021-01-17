@@ -60,7 +60,7 @@ const Dashboard = () => {
                 vals[k] = [...new Set(data.map(d => d[k]).filter(d => d !== '?'))];
             });
             setValues(vals);
-            const ages = new Set(data.map(d => +d.age));
+            const ages = data.map(d => +d.age);
             setAgeRange([Math.min(...ages), Math.max(...ages)]);
         });
     }, []);
