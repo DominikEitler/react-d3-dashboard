@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import drawBarChart from '../charts/barChart';
 
 
-const BarChartEdu = ({data, values, filter}) => {
+const BarChartEdu = ({ data, values, filter }) => {
     const outerWidth = 1000 / 8 * 4;
     const outerHeight = 250;
     const selector = 'vis-barchart-edu';
@@ -16,7 +16,7 @@ const BarChartEdu = ({data, values, filter}) => {
     return (
         <div id={selector} className='pane'>
             <div className='header'>Education</div>
-            <div className={selector}/>
+            <div className={selector} />
         </div>
     );
 };

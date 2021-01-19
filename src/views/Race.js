@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import drawPieChart from '../charts/pieChart';
 
 
-const PieChartRace = ({data, values, filter}) => {
+const PieChartRace = ({ data, values, filter }) => {
     const outerWidth = 1000 / 8 * 2;
     const outerHeight = 260;
     const selector = 'vis-piechart-race';
@@ -16,7 +16,7 @@ const PieChartRace = ({data, values, filter}) => {
     return (
         <div id={selector} className='pane'>
             <div className='header'>Ethnicity</div>
-            <div className={selector}/>
+            <div className={selector} />
         </div>
     );
 };

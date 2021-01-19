@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import drawBarChart from '../charts/barChart';
 
 
-const BarChartMarital = ({data, values, filter}) => {
+const BarChartMarital = ({ data, values, filter }) => {
     const outerWidth = 1000 / 8 * 3;
     const outerHeight = 250;
     const selector = 'vis-barchart-marital';
@@ -16,7 +16,7 @@ const BarChartMarital = ({data, values, filter}) => {
     return (
         <div id={selector} className='pane'>
             <div className='header'>Marital Status</div>
-            <div className={selector}/>
+            <div className={selector} />
         </div>
     );
 };

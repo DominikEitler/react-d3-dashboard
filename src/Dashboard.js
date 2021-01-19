@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import './styles.css';
 
@@ -67,16 +67,16 @@ const Dashboard = () => {
 
     useEffect(() => {
         setFilteredData(data.filter(d => {
-                return (filters.gender ? d.gender === filters.gender : true) &&
-                    (filters.gender ? d.gender === filters.gender : true) &&
-                    (filters.race ? d.race === filters.race : true) &&
-                    (filters.education ? d.education === filters.education : true) &&
-                    (filters.workclass ? d.workclass === filters.workclass : true) &&
-                    (filters.income ? d.income === filters.income : true) &&
-                    (!!filters.age[0] ? (d.age >= filters.age[0] && d.age <= filters.age[1]) : true) &&
-                    (filters.marital ? d['marital-status'] === filters.marital : true) &&
-                    (filters.occupation ? d.occupation === filters.occupation : true);
-            }),
+            return (filters.gender ? d.gender === filters.gender : true) &&
+                (filters.gender ? d.gender === filters.gender : true) &&
+                (filters.race ? d.race === filters.race : true) &&
+                (filters.education ? d.education === filters.education : true) &&
+                (filters.workclass ? d.workclass === filters.workclass : true) &&
+                (filters.income ? d.income === filters.income : true) &&
+                (!!filters.age[0] ? (d.age >= filters.age[0] && d.age <= filters.age[1]) : true) &&
+                (filters.marital ? d['marital-status'] === filters.marital : true) &&
+                (filters.occupation ? d.occupation === filters.occupation : true);
+        }),
         );
     }, [data, filters]);
 
@@ -142,21 +142,21 @@ const Dashboard = () => {
         <div className='content'>
 
             <div className="grid">
-                <PieChartGender data={filteredData} values={values['gender']} filter={filterGender}/>
+                <PieChartGender data={filteredData} values={values['gender']} filter={filterGender} />
 
-                <PieChartRace data={filteredData} values={values['race']} filter={filterRace}/>
+                <PieChartRace data={filteredData} values={values['race']} filter={filterRace} />
 
-                <BarChartEdu data={filteredData} values={values['education']} filter={filterEducation}/>
+                <BarChartEdu data={filteredData} values={values['education']} filter={filterEducation} />
 
-                <BarChartWork data={filteredData} values={values['workclass']} filter={filterWorkclass}/>
+                <BarChartWork data={filteredData} values={values['workclass']} filter={filterWorkclass} />
 
-                <BarChartIncome data={filteredData} values={values['income']} filter={filterIncome}/>
+                <BarChartIncome data={filteredData} values={values['income']} filter={filterIncome} />
 
-                <DistChartAge data={filteredData} range={ageRange} filter={filterAge}/>
+                <DistChartAge data={filteredData} range={ageRange} filter={filterAge} />
 
-                <BarChartMarital data={filteredData} values={values['marital-status']} filter={filterMarital}/>
+                <BarChartMarital data={filteredData} values={values['marital-status']} filter={filterMarital} />
 
-                <BarChartOccupation data={filteredData} values={values['occupation']} filter={filterOccupation}/>
+                <BarChartOccupation data={filteredData} values={values['occupation']} filter={filterOccupation} />
             </div>
         </div>
     );

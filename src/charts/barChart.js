@@ -11,7 +11,7 @@ const drawBarChart = (selector, data, target, values, filter, outerWidth, outerH
     }));
 
     d3.select(`.${selector} > *`).remove();
-    const margin = {top: 20, right: 20, bottom: mBottom, left: 40};
+    const margin = { top: 20, right: 20, bottom: mBottom, left: 40 };
     const width = outerWidth - margin.left - margin.right;
     const height = outerHeight - margin.top - margin.bottom;
     let svg = d3.select(`.${selector}`).append('svg')
@@ -26,8 +26,8 @@ const drawBarChart = (selector, data, target, values, filter, outerWidth, outerH
     let x = d3.scaleBand()
         .domain(dataset.map((d) => d.label))
         .range([0, width])
-        .padding(0.1)
-    ;
+        .padding(0.1);
+
     let y = d3.scaleLinear()
         .domain([0, d3.max(dataset, (d) => d.count)])
         .range([height, 0]);
@@ -50,7 +50,7 @@ const drawBarChart = (selector, data, target, values, filter, outerWidth, outerH
         .attr('fill', (_, i) => color(i))
         .style('transition', '50ms ease-in-out')
         .on('click', d => filter(d.label))
-        .on('mouseover', function (d, i) {
+        .on('mouseover', function (d) {
             d3.select(this)
                 .style('cursor', 'pointer')
                 .attr('x', activeX)
@@ -59,7 +59,7 @@ const drawBarChart = (selector, data, target, values, filter, outerWidth, outerH
                 .style('visibility', 'visible')
                 .text(`${d.label}: ${d.count}`);
         })
-        .on('mouseout', function (d, i) {
+        .on('mouseout', function () {
             d3.select(this)
                 .style('cursor', 'default')
                 .attr('x', inactiveX)
@@ -81,7 +81,14 @@ const drawBarChart = (selector, data, target, values, filter, outerWidth, outerH
         .call(d3.axisBottom(x))
         .selectAll('text')
         .style('text-anchor', 'end')
-        .attr('transform', `rotate(${rotateLabels ? -65 : 0})`);
+        .attr('transform', `rotate(${rotateLabels ? -65 : 0})`)
+        .on('click', d => filter(d))
+        .on('mouseover', function () {
+            d3.select(this).style('cursor', 'pointer')
+        })
+        .on('mouseout', function () {
+            d3.select(this).style('cursor', 'default')
+        });
 
     // add the y Axis
     svg.append('g')
@@ -97,7 +104,7 @@ const drawBarChart = (selector, data, target, values, filter, outerWidth, outerH
         .attr('dy', '1em')
         .attr('font-size', '10px')
         .style('text-anchor', 'middle')
-        .text('count');
+        .text('count')
 };
 
 export default drawBarChart;

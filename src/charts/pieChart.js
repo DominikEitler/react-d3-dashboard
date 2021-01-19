@@ -10,7 +10,7 @@ const drawPieChart = (selector, data, target, values, filter, outerWidth, outerH
     }));
 
     d3.select(`.${selector} > *`).remove();
-    const margin = {top: 10, right: 20, bottom: 30, left: 40};
+    const margin = { top: 10, right: 20, bottom: 30, left: 40 };
     const width = outerWidth - margin.left - margin.right;
     const height = outerHeight - margin.top - margin.bottom;
 
@@ -82,7 +82,14 @@ const drawPieChart = (selector, data, target, values, filter, outerWidth, outerH
         .attr('height', labelHeight)
         .attr('fill', (_, i) => color(i))
         .attr('stroke', 'grey')
-        .style('stroke-width', '1px');
+        .style('stroke-width', '1px')
+        .on('click', (_, i) => filter(dataset[i].label))
+        .on('mouseover', function () {
+            d3.select(this).style('cursor', 'pointer')
+        })
+        .on('mouseout', function () {
+            d3.select(this).style('cursor', 'default')
+        });
 
     legend
         .selectAll(null)
@@ -93,9 +100,14 @@ const drawPieChart = (selector, data, target, values, filter, outerWidth, outerH
         .attr('x', labelHeight * 1.2)
         .attr('y', d => -labelHeight * d.index * 1.8 + labelHeight)
         .style('font-family', 'sans-serif')
-        .style('font-size', `${labelHeight}px`);
-
-
+        .style('font-size', `${labelHeight}px`)
+        .on('click', (_, i) => filter(dataset[i].label))
+        .on('mouseover', function () {
+            d3.select(this).style('cursor', 'pointer')
+        })
+        .on('mouseout', function () {
+            d3.select(this).style('cursor', 'default')
+        });
 };
 
 export default drawPieChart;

@@ -12,7 +12,7 @@ const kernelEpanechnikov = (k) => {
 
 const drawDistChart = (selector, data, target, range, filter, outerWidth, outerHeight, mBottom) => {
     d3.select(`.${selector} > *`).remove();
-    const margin = {top: 20, right: 20, bottom: mBottom, left: 40};
+    const margin = { top: 20, right: 20, bottom: mBottom, left: 40 };
     const width = outerWidth - margin.left - margin.right;
     const height = outerHeight - margin.top - margin.bottom;
     let svg = d3.select(`.${selector}`).append('svg')
