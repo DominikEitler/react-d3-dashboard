@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "412ba9fa5ada789486edead9339d1960",
+    "revision": "6aaad1bc1d39b702c33a131169fd0593",
     "url": "/react-d3-dashboard/index.html"
   },
   {
-    "revision": "84b7bdb591ac2fbbbb51",
-    "url": "/react-d3-dashboard/static/css/2.b6e3a137.chunk.css"
+    "revision": "1e77599f5952da616273",
+    "url": "/react-d3-dashboard/static/css/2.929389fa.chunk.css"
   },
   {
-    "revision": "1bd535fdf188a92a319b",
+    "revision": "68379a794143a42189cb",
     "url": "/react-d3-dashboard/static/css/main.57abb245.chunk.css"
   },
   {
-    "revision": "84b7bdb591ac2fbbbb51",
+    "revision": "1e77599f5952da616273",
     "url": "/react-d3-dashboard/static/js/2.26a1e3ab.chunk.js"
   },
   {
-    "revision": "1bd535fdf188a92a319b",
-    "url": "/react-d3-dashboard/static/js/main.edf7c2d8.chunk.js"
+    "revision": "68379a794143a42189cb",
+    "url": "/react-d3-dashboard/static/js/main.45a6f2b3.chunk.js"
   },
   {
     "revision": "0061c3f578e5062a57c7",
