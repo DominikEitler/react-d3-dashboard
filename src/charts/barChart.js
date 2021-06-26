@@ -47,7 +47,7 @@ const drawBarChart = (selector, data, target, values, filter, outerWidth, outerH
         .attr('width', inactiveW)
         .attr('y', d => y(d.count))
         .attr('height', d => height - y(d.count))
-        .attr('fill', (_, i) => color(i))
+        .attr('fill', (_, i) => 'rgb(0, 120, 178)')
         .style('transition', '50ms ease-in-out')
         .on('click', d => filter(d.label))
         .on('mouseover', function (d) {
